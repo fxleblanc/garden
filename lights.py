@@ -11,13 +11,16 @@ relay = 23
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(relay, GPIO.OUT)
 
+
 def lights_on():
     print("Lights on")
     GPIO.output(relay, False)
 
+
 def lights_off():
     print("Lights off")
     GPIO.output(relay, True)
+
 
 def signal_handler(sig, frame):
     GPIO.cleanup()
