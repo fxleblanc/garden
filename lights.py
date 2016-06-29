@@ -12,18 +12,18 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(relay, GPIO.OUT)
 
 def lights_on():
-	print("Lights on")
-	GPIO.output(relay, False)
-	
+    print("Lights on")
+    GPIO.output(relay, False)
+
 def lights_off():
-	print("Lights off")
-	GPIO.output(relay, True)
-	
+    print("Lights off")
+    GPIO.output(relay, True)
+
 def signal_handler(sig, frame):
-	GPIO.cleanup()
-	print("Exiting")
-	sys.exit(0)
-	
+    GPIO.cleanup()
+    print("Exiting")
+    sys.exit(0)
+
 
 start = "8:00"
 close = "23:00"
@@ -33,9 +33,9 @@ start_hour = int(start.split(":")[0])
 close_hour = int(close.split(":")[0])
 
 if current_hour < start_hour or current_hour > close_hour:
-	lights_off()
+    lights_off()
 else:
-	lights_on()
+    lights_on()
 
 schedule.every().day.at("8:00").do(lights_on)
 schedule.every().day.at("23:00").do(lights_off)
@@ -44,5 +44,5 @@ signal.signal(signal.SIGINT, signal_handler)
 
 print("Starting lights service")
 while True:
-	schedule.run_pending()
-	time.sleep(1)
+    schedule.run_pending()
+    time.sleep(1)
